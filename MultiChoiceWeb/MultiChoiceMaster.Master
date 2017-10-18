@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MultiChoiceMaster.master.cs" Inherits="MultiChoiceWeb.MultiChoiceMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="masterHeader" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+            <h1><u><asp:Label ID="Label1" runat="server" Text="MultiChocie Apllication Web Front End"></asp:Label></u></h1><br />
+            
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
