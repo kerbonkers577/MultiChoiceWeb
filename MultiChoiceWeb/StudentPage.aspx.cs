@@ -47,32 +47,6 @@ namespace MultiChoiceWeb
 
         public void listFill(DataSet dataset)
         {
-            //List<int> ID = new List<int>();
-            //List<string> names = new List<string>();
-            
-            //int tempID = 0;
-            //string tempName = "";
-            
-
-            //int count = dataset.Tables[0].Rows.Count;
-
-            //for (int i = 0; i < count; i++)
-            //{
-            //    object[] testDetails = dataset.Tables[0].Rows[i].ItemArray;
-
-            //    for (int j = 0; j < testDetails.Length; j++)
-            //    {
-            //        tempID = Convert.ToInt16(testDetails[0]);
-            //        tempName = testDetails[1].ToString();
-                    
-            //    }
-
-            //    //testDict.Add(tempID, tempName);
-            //    ID.Add(tempID);
-            //    names.Add(tempName);
-            //}
-
-            
             if(!Page.IsPostBack)
             {
                 lstTests.DataSource = dataset;

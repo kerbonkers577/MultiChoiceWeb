@@ -9,6 +9,7 @@ namespace MultipleChoiceLibrary
     public class Question
     {
         //Quesiton holds text and actual int answer for a question for a test
+        private int questionID;
         private string questionText;
         private string answer1;
         private string answer2;
@@ -29,7 +30,25 @@ namespace MultipleChoiceLibrary
             this.actualAnswer = actualAnswer;
         }
 
+        public Question(int ID, string questionText, string answer1, string answer2, string answer3, string answer4, int actualAnswer)
+        {
+            //Create Singular Question for test
+            this.questionID = ID;
+            this.questionText = questionText;
+            this.answer1 = answer1;
+            this.answer2 = answer2;
+            this.answer3 = answer3;
+            this.answer4 = answer4;
+            this.actualAnswer = actualAnswer;
+        }
+
         //Accessors
+
+        public int GetID()
+        {
+            return questionID;
+        }
+
         public string GetQuestionText()
         {
             return questionText;
@@ -60,7 +79,14 @@ namespace MultipleChoiceLibrary
             return actualAnswer;
         }
 
+        
         //Mutators
+
+        public void SetQuestionID(int ID)
+        {
+            this.questionID = ID;
+        }
+
         public void SetQuestionText(string questionText)
         {
             this.questionText = questionText;
@@ -84,6 +110,11 @@ namespace MultipleChoiceLibrary
         public void SetAnswer4Text(string answer4)
         {
             this.answer4 = answer4;
+        }
+
+        public void SetActualAnswer(int answer)
+        {
+            this.actualAnswer = answer;
         }
     }
 }
