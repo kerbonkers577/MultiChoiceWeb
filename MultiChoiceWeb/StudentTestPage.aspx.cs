@@ -18,9 +18,12 @@ namespace MultiChoiceWeb
         private SqlConnection dbConn;
         private DataAccess data = new DataAccess();
         private int itemCount;
-        private int count;
+        private int count = 0;
         private List<int> studentAnswers = new List<int>();
 
+
+        int testCount = 0;
+        int testItemCount = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             lblStudentName.Text = Session["stdName"].ToString();
@@ -28,11 +31,10 @@ namespace MultiChoiceWeb
 
             try
             {
-                dbConn = new SqlConnection(connectionString);
-
                 if(!Page.IsPostBack)
                 {
-                    
+                    dbConn = new SqlConnection(connectionString);
+
                     //Bringing up test details for information to the student
                     DataSet testInfo = data.GetSpecificTest(dbConn, Convert.ToInt16(Session["TestID"]));
 
@@ -46,6 +48,7 @@ namespace MultiChoiceWeb
                     Question temp = new Question();
 
                     itemCount = questions.Tables[0].Rows.Count;
+
                     object[] itemGet;
 
                     for (int i = 0; i < itemCount; i++)
@@ -64,6 +67,7 @@ namespace MultiChoiceWeb
                         temp.SetActualAnswer(Convert.ToInt16(itemGet[7]));
 
                         testQ.Add(temp);
+                        temp = new Question();
                     }
 
                     //Set values for each radio button for answer submission
@@ -73,15 +77,20 @@ namespace MultiChoiceWeb
                     rlStudentSelection.Items[2].Value = "3";
                     rlStudentSelection.Items[3].Value = "4";
 
+                    //Heading
+                    lblQuestionTitle.Text = testQ[0].GetQuestionText();
+
                     //These are the text values for the radio list, these change depending on the questions
                     rlStudentSelection.Items[0].Text = testQ[0].GetAnswer1Text();
                     rlStudentSelection.Items[1].Text = testQ[0].GetAnswer2Text();
                     rlStudentSelection.Items[2].Text = testQ[0].GetAnswer3Text();
                     rlStudentSelection.Items[3].Text = testQ[0].GetAnswer4Text();
-
-                    count++;
+                    
+                    Session["Count"] = count;
+                    Session["ItemCount"] = itemCount;
+                    Session["testQuestions"] = testQ;
+                    Session["StudentAnswers"] = studentAnswers;
                 }
-
             }
             catch(SqlException)
             {
@@ -93,22 +102,35 @@ namespace MultiChoiceWeb
         {
             if (rlStudentSelection.SelectedItem != null)
             {
-                if (itemCount < count)
+                //Requires setting local variables to session states to change them
+                //This is for adding values
+                //and changing LCVs
+
+                //Save answer
+                studentAnswers = (List<int>)Session["StudentAnswers"];
+                studentAnswers.Add(Convert.ToInt16(rlStudentSelection.SelectedItem.Value));
+                Session["StudentAnswers"] = studentAnswers;
+
+                //Increment counter
+                count = Convert.ToInt16(Session["Count"]);
+                count++;
+                Session["Count"] = count;
+
+                if (Convert.ToInt16(Session["Count"]) < Convert.ToInt16(Session["ItemCount"]))
                 {
                     //Change radio button text
-                    rlStudentSelection.Items[0].Text = testQ[count].GetAnswer1Text();
-                    rlStudentSelection.Items[1].Text = testQ[count].GetAnswer2Text();
-                    rlStudentSelection.Items[2].Text = testQ[count].GetAnswer3Text();
-                    rlStudentSelection.Items[3].Text = testQ[count].GetAnswer4Text();
+                    testQ = (List<Question>)Session["testQuestions"];
+                    
+                    lblQuestionTitle.Text = testQ[Convert.ToInt16(Session["Count"])].GetQuestionText();
+                    rlStudentSelection.Items[0].Text = testQ[Convert.ToInt16(Session["Count"])].GetAnswer1Text();
+                    rlStudentSelection.Items[1].Text = testQ[Convert.ToInt16(Session["Count"])].GetAnswer2Text();
+                    rlStudentSelection.Items[2].Text = testQ[Convert.ToInt16(Session["Count"])].GetAnswer3Text();
+                    rlStudentSelection.Items[3].Text = testQ[Convert.ToInt16(Session["Count"])].GetAnswer4Text();
 
-                    //Save answer
-                    studentAnswers.Add(Convert.ToInt16(rlStudentSelection.SelectedItem.Value));
-
-                    //Increment counter
-                    count++;
                 }
                 else
                 {
+                    
                     Response.Redirect("Memo.aspx");
                 }
             }
