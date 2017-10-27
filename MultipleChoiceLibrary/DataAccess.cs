@@ -586,7 +586,7 @@ namespace MultipleChoiceLibrary
         {
             DataSet studentQA = new DataSet();
 
-            string sql = @"select a.studentAnswer_ID, a.studentAnswer, q.question_ID, q.actualAnswer
+            string sql = @"select q.question_text as [Question], a.studentAnswer as [Your Answer], q.actualAnswer as [Actual Answer]
                             from StudentAnswer a
                             join Question q on a.question_ID = q.question_ID
                             join Test t on q.test_ID = t.test_ID

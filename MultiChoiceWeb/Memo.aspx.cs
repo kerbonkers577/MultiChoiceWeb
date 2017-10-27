@@ -19,7 +19,10 @@ namespace MultiChoiceWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            studentAnswers = (List<int>)Session["StudentAnswers"];
+
+            lblTestName.Text = Session["TestName"].ToString();
+            lblStudentName.Text = Session["stdName"].ToString();
+            lblStudentNum.Text = Session["studentNum"].ToString();
 
             try
             {
@@ -31,12 +34,20 @@ namespace MultiChoiceWeb
                 DataSet memo = data.GetStudentQuestionAnswersForTest(dbConn, studentID, testID);
                 grdMemo.DataSource = memo;
                 grdMemo.DataBind();
+
+                int mark = data.CalculateStudentsMarkForTest(dbConn, studentID, testID);
+                lblMark.Text = "Mark : " + mark.ToString() + " / " + Session["ItemCount"];
             }
             catch(SqlException ex)
             {
 
             }
             
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("StudentPage.aspx");
         }
     }
 }

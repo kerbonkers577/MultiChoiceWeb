@@ -14,5 +14,5 @@
         <br />
         <asp:Label ID="lblMark" runat="server" Text="Label"></asp:Label>
     </div>
-    
+    <asp:Button ID="btnReturn" runat="server" Text="Return" OnClick="btnReturn_Click" />
 </asp:Content>

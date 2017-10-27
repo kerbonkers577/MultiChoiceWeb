@@ -43,6 +43,7 @@ namespace MultiChoiceWeb
                     object[] testInfoArray = testInfo.Tables[0].Rows[0].ItemArray;
 
                     lblTestName.Text = testInfoArray[1].ToString();
+                    Session["TestName"] = testInfoArray[1].ToString();
 
                     //Filling Question List with question objects with values from database
                     //Get Test questions from selected test session token
