@@ -10,7 +10,7 @@
 namespace MultiChoiceWeb {
     
     
-    public partial class StudentTestPage {
+    public partial class Memo {
         
         /// <summary>
         /// lblTestName control.
@@ -40,39 +40,21 @@ namespace MultiChoiceWeb {
         protected global::System.Web.UI.WebControls.Label lblStudentNum;
         
         /// <summary>
-        /// lblQuestionTitle control.
+        /// grdMemo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuestionTitle;
+        protected global::System.Web.UI.WebControls.GridView grdMemo;
         
         /// <summary>
-        /// rlStudentSelection control.
+        /// lblMark control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rlStudentSelection;
-        
-        /// <summary>
-        /// lblRadioError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRadioError;
-        
-        /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.Label lblMark;
     }
 }

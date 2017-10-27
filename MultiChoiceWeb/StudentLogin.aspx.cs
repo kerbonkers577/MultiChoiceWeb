@@ -42,11 +42,18 @@ namespace MultiChoiceWeb
         }
 
         private DataAccess data = new DataAccess();
-        private SqlConnection dbConn = new SqlConnection(connectionString);
+        private SqlConnection dbConn;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                dbConn = new SqlConnection(connectionString);
+            }
+            catch(SqlException ex)
+            {
+
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -62,6 +69,7 @@ namespace MultiChoiceWeb
                 DataSet name = data.GetSpecificStudent(dbConn, studentNum);
                 object [] names = name.Tables[0].Rows[0].ItemArray;
 
+                Session["stdID"] = names[0].ToString();
                 Session["stdName"] = names[1].ToString();
                 Response.Redirect("StudentPage.aspx");
             }
