@@ -12,7 +12,9 @@ namespace MultiChoiceWeb
 {
     public partial class StudentTestPage : System.Web.UI.Page
     {
+        //Test Questions
         private List<Question> testQ = new List<Question>();
+
         private string connectionString 
             = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["database"].ToString();
         private SqlConnection dbConn;
@@ -55,6 +57,7 @@ namespace MultiChoiceWeb
                     {
                         itemGet = questions.Tables[0].Rows[i].ItemArray;
 
+                        //Get ID for adding it to studentAnswer table as FK
                         temp.SetQuestionID(Convert.ToInt16(itemGet[0]));
                         //Skip test ID as we already have it
                         //Sets Quesiton text to temp question object
@@ -67,6 +70,8 @@ namespace MultiChoiceWeb
                         temp.SetActualAnswer(Convert.ToInt16(itemGet[7]));
 
                         testQ.Add(temp);
+                        //Question array holds reference so temp must be reset to a new object
+                        //otherwise it will change all stored questions
                         temp = new Question();
                     }
 
@@ -116,6 +121,7 @@ namespace MultiChoiceWeb
                 count++;
                 Session["Count"] = count;
 
+                //If there are still questions
                 if (Convert.ToInt16(Session["Count"]) < Convert.ToInt16(Session["ItemCount"]))
                 {
                     //Change radio button text
@@ -130,7 +136,17 @@ namespace MultiChoiceWeb
                 }
                 else
                 {
-                    
+                    int studentID = Convert.ToInt16(Session["stdID"]);
+                    dbConn = new SqlConnection(connectionString);
+
+                    testQ = (List<Question>)Session["testQuestions"];
+                    studentAnswers = (List<int>)Session["StudentAnswers"];
+                    //Adds Students answers to database with reference of question and test
+                    for (int i = 0; i < testQ.Count; i++)
+                    {
+                        data.InsertStudentAnswer(dbConn, studentID, testQ[i].GetID(), studentAnswers[i]);
+                    }
+
                     Response.Redirect("Memo.aspx");
                 }
             }

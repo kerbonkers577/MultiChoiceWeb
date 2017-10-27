@@ -582,6 +582,29 @@ namespace MultipleChoiceLibrary
             return studentQA;
         }
 
+        public DataSet GetStudentQuestionAnswersForTest(SqlConnection dbconn, int studentID, int testID)
+        {
+            DataSet studentQA = new DataSet();
+
+            string sql = @"select a.studentAnswer_ID, a.studentAnswer, q.question_ID, q.actualAnswer
+                            from StudentAnswer a
+                            join Question q on a.question_ID = q.question_ID
+                            join Test t on q.test_ID = t.test_ID
+                            where a.student_ID = " + studentID + " and t.test_ID = " + testID;
+
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, dbconn);
+                adapter.Fill(studentQA);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Could not retrieve StudentQA table as dataset: " + e.Message);
+            }
+
+            return studentQA;
+        }
+
         public int CalculateStudentsMark(SqlConnection dbconn, int studentID)
         {
             int mark = 0;
@@ -591,6 +614,35 @@ namespace MultipleChoiceLibrary
                             from StudentAnswer a
                             join Question q on a.question_ID = q.question_ID
                             where a.student_ID = " + studentID + " and a.studentAnswer = actualAnswer";
+
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, dbconn);
+                adapter.Fill(studentMark);
+
+                object[] markCount = studentMark.Tables[0].Rows[0].ItemArray;
+
+                mark = Convert.ToInt16(markCount[0]);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Could not retrieve Student's marks table as dataset: " + e.Message);
+            }
+
+            return mark;
+        }
+
+        public int CalculateStudentsMarkForTest(SqlConnection dbconn, int studentID, int testID)
+        {
+            int mark = 0;
+            DataSet studentMark = new DataSet();
+
+            string sql = @"select count(studentAnswer) as [Mark]
+                            from StudentAnswer a
+                            join Question q on a.question_ID = q.question_ID
+                            join Test t on q.test_ID = t.test_ID
+                            where a.student_ID = " + studentID + @" and a.studentAnswer = actualAnswer 
+                            and t.test_ID = " + testID;
 
             try
             {

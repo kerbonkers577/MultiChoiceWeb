@@ -53,11 +53,6 @@ namespace MultipleChoiceLibrary
                 QRow = Questions.Tables[0].Rows[i].ItemArray;
                 QARow = QA.Tables[0].Rows[i].ItemArray;
 
-                //Quesitons list population
-                //tempQuestion = new Question((QRow[2] + ""), (QRow[3] + ""),
-                //        (QRow[4] + ""), (QRow[5] + ""), (QRow[6] + ""), Convert.ToInt16(QRow[7]));
-
-
                 tempQuestion.SetQuestionText(QRow[2] + "");
                 tempQuestion.SetAnswer1Text(QRow[3] + "");
                 tempQuestion.SetAnswer2Text(QRow[4] + "");

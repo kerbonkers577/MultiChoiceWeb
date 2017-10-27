@@ -12,7 +12,8 @@ namespace MultiChoiceWeb
 {
     public partial class SpecificStudentMark : System.Web.UI.Page
     {
-        private string connectionString = Properties.Settings.Default.ConnectionString;
+        private string connectionString = 
+            System.Web.Configuration.WebConfigurationManager.ConnectionStrings["database"].ToString();
         private DataAccess data = new DataAccess();
         private SqlConnection dbConn;
 
@@ -22,10 +23,6 @@ namespace MultiChoiceWeb
             DataSet studentsMarks = data.GetStudentMark(dbConn, Session["studentNum"].ToString());
             grdMarks.DataSource = studentsMarks;
             grdMarks.DataBind();
-
-            //grdMarks.Columns[1].HeaderText = "Student's Name";
-            //grdMarks.Columns[2].HeaderText = "Test";
-            //grdMarks.Columns[3].HeaderText = "Mark for test";
 
         }
 

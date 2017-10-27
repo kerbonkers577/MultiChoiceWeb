@@ -69,6 +69,7 @@ namespace MultiChoiceWeb
                 DataSet name = data.GetSpecificStudent(dbConn, studentNum);
                 object [] names = name.Tables[0].Rows[0].ItemArray;
 
+                Session["stdID"] = names[0].ToString();
                 Session["stdName"] = names[1].ToString();
                 Response.Redirect("StudentPage.aspx");
             }
