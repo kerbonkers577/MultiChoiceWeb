@@ -536,7 +536,7 @@ namespace MultipleChoiceLibrary
         public DataSet GetStudentMarkTable(SqlConnection dbconn)
         {
 
-            string sql = @"select s.student_Name, t.test_Name, mark
+            string sql = @"select s.student_Name as [Student's Name], t.test_Name as [Test Name], mark as [Mark Obtained]
                             from StudentMark m
                             join Student s on m.student_ID = s.student_ID
                             join Test t on m.test_ID = t.test_ID";
