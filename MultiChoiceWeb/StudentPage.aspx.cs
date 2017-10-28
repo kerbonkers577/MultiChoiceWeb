@@ -63,6 +63,10 @@ namespace MultiChoiceWeb
         int test;
         protected void btnTestSelect_Click(object sender, EventArgs e)
         {
+            //TODO:
+            //Check if student has already taken test
+            //Use Marks table
+            //If student has got marks for test, then he has taken the test
             
             if (test != -1)
             {

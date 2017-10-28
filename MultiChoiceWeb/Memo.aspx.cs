@@ -19,29 +19,34 @@ namespace MultiChoiceWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            lblTestName.Text = Session["TestName"].ToString();
-            lblStudentName.Text = Session["stdName"].ToString();
-            lblStudentNum.Text = Session["studentNum"].ToString();
-
-            try
+            if(!Page.IsPostBack)
             {
-                dbConn = new SqlConnection(connectionString);
+                lblTestName.Text = Session["TestName"].ToString();
+                lblStudentName.Text = Session["stdName"].ToString();
+                lblStudentNum.Text = Session["studentNum"].ToString();
 
-                int studentID = Convert.ToInt16(Session["stdID"]);
-                int testID = Convert.ToInt16(Session["TestID"]);
+                try
+                {
+                    dbConn = new SqlConnection(connectionString);
 
-                DataSet memo = data.GetStudentQuestionAnswersForTest(dbConn, studentID, testID);
-                grdMemo.DataSource = memo;
-                grdMemo.DataBind();
+                    int studentID = Convert.ToInt16(Session["stdID"]);
+                    int testID = Convert.ToInt16(Session["TestID"]);
 
-                int mark = data.CalculateStudentsMarkForTest(dbConn, studentID, testID);
-                lblMark.Text = "Mark : " + mark.ToString() + " / " + Session["ItemCount"];
+                    DataSet memo = data.GetStudentQuestionAnswersForTest(dbConn, studentID, testID);
+                    grdMemo.DataSource = memo;
+                    grdMemo.DataBind();
+
+                    int mark = data.CalculateStudentsMarkForTest(dbConn, studentID, testID);
+                    lblMark.Text = "Mark : " + mark.ToString() + " / " + Session["ItemCount"];
+
+                    data.InsertMark(dbConn, studentID, testID, mark);
+                }
+                catch (SqlException ex)
+                {
+
+                }
             }
-            catch(SqlException ex)
-            {
-
-            }
+            
             
         }
 
