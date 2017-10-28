@@ -96,6 +96,7 @@
   <ItemGroup>
     <Content Include="AllStudentsMarks.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="MakeTestPage.aspx" />
     <Content Include="Memo.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -135,6 +136,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MakeTestPage.aspx.cs">
+      <DependentUpon>MakeTestPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MakeTestPage.aspx.designer.cs">
+      <DependentUpon>MakeTestPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Memo.aspx.cs">
       <DependentUpon>Memo.aspx</DependentUpon>
