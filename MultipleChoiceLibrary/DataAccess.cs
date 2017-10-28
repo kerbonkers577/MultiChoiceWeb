@@ -511,6 +511,28 @@ namespace MultipleChoiceLibrary
             return marks;
         }
 
+        public DataSet GetStudentMarkForTest(SqlConnection dbconn, int studentID, int testID)
+        {
+            
+
+            string sql = @"select markID
+                            from StudentMark s
+                            where test_ID = " + testID + " and student_ID = " + studentID;
+            DataSet marks = new DataSet();
+
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, dbconn);
+                adapter.Fill(marks);
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Could not retrieve StudentMark table as dataset: " + e.Message);
+            }
+
+            return marks;
+        }
+
         public DataSet GetStudentMarkTable(SqlConnection dbconn)
         {
 

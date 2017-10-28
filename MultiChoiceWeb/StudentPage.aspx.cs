@@ -67,16 +67,54 @@ namespace MultiChoiceWeb
             //Check if student has already taken test
             //Use Marks table
             //If student has got marks for test, then he has taken the test
+            try
+            {
+                dbConn = new SqlConnection(connectionString);
+                int studentID = Convert.ToInt16(Session["stdID"]);
+                DataSet markCheck = data.GetStudentMarkForTest(dbConn, studentID, test);
+
+                object[] arrMarkCheck = null;
+                bool markFlag = false;
+
+                if(markCheck.Tables[0].Rows.Count != 0)
+                {
+                    arrMarkCheck = markCheck.Tables[0].Rows[0].ItemArray;
+
+                    if (arrMarkCheck[0] != null)
+                    {
+                        markFlag = true;
+                    }
+                }
+                
+
+
+                if (markFlag == false && test != -1)
+                {
+                    Session["TestID"] = test;
+                    Response.Redirect("StudentTestPage.aspx");
+                }
+                else
+                {
+                    if (markFlag == true)
+                    {
+                        lblTestSeelctErr.Text = "Test already completed";
+                    }
+                    else
+                    {
+                        lblTestSeelctErr.Text = "No Test has been selected";
+                    }
+
+                }
+            }
+            catch(IndexOutOfRangeException ex)
+            {
+                //Will occur when student has no marks and arrMarkCheck will not be filled
+            }
+            catch(SqlException ex)
+            {
+
+            }
             
-            if (test != -1)
-            {
-                Session["TestID"] = test;
-                Response.Redirect("StudentTestPage.aspx");
-            }
-            else
-            {
-                lblTestSeelctErr.Text = "No Test has been selected";
-            }
         }
 
         protected void lstTests_SelectedIndexChanged(object sender, EventArgs e)
