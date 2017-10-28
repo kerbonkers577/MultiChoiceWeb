@@ -13,5 +13,20 @@ namespace MultiChoiceWeb
         {
 
         }
+
+        protected void btnMakeTest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnViewAllMarks_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AllStudentsMarks.aspx");
+        }
+
+        protected void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }
