@@ -3,7 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="PageButtons">
-        <asp:Button ID="teacherBtn" runat="server" Text="Click if you're a Teacher" /><br />
+        <h1><u>Home</u></h1>
+        <asp:Button ID="teacherBtn" runat="server" Text="Click if you're a Teacher" OnClick="teacherBtn_Click" /><br />
+        <br />
         <asp:Button ID="studentBtn" runat="server" Text="Click if you're a Student" OnClick="studentBtn_Click" /><br />
     </div>
 </asp:Content>

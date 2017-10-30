@@ -8,7 +8,7 @@
     <br />
     </div>
     <div id="Body">
-        <asp:Label ID="Label1" runat="server" Text="Student Name : "></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Student Number : "></asp:Label>
         <asp:TextBox ID="txtStudentNum" runat="server"></asp:TextBox><br />
         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStudentNum" ErrorMessage="Please enter a student number" ForeColor="#ff0000"></asp:RequiredFieldValidator>
         <br />

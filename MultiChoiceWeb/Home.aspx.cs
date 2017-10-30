@@ -19,5 +19,10 @@ namespace MultiChoiceWeb
             Response.Redirect("StudentLogin.aspx");
             
         }
+
+        protected void teacherBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TeacherPage.aspx");
+        }
     }
 }

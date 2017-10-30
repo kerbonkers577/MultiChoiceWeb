@@ -4,9 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><u>Teacher Options</u></h1>
     <br />
-    <asp:Button ID="btnMakeTest" runat="server" Text="Make Test" OnClick="btnMakeTest_Click" />
-    <br />
-    <br />
     <asp:Button ID="btnViewAllMarks" runat="server" Text="View Marks" OnClick="btnViewAllMarks_Click" />
     <br />
     <br />
