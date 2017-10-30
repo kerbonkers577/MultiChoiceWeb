@@ -19,10 +19,22 @@ namespace MultiChoiceWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            dbConn = new SqlConnection(connectionString);
-            DataSet studentsMarks = data.GetStudentMark(dbConn, Session["studentNum"].ToString());
-            grdMarks.DataSource = studentsMarks;
-            grdMarks.DataBind();
+            try
+            {
+                dbConn = new SqlConnection(connectionString);
+                DataSet studentsMarks = data.GetStudentMark(dbConn, Session["studentNum"].ToString());
+                grdMarks.DataSource = studentsMarks;
+                grdMarks.DataBind();
+            }
+            catch(SqlException ex)
+            {
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
+            }
+            catch(Exception ex)
+            {
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
+            }
+            
 
         }
 

@@ -28,7 +28,7 @@ namespace MultiChoiceWeb
             }
             catch(SqlException ex)
             {
-
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
             }
             
         }

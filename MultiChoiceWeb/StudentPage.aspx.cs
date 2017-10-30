@@ -30,7 +30,7 @@ namespace MultiChoiceWeb
             }
             catch (SqlException ex)
             {
-                
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
             }
         }
 
@@ -109,10 +109,11 @@ namespace MultiChoiceWeb
             catch(IndexOutOfRangeException ex)
             {
                 //Will occur when student has no marks and arrMarkCheck will not be filled
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
             }
             catch(SqlException ex)
             {
-
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
             }
             
         }

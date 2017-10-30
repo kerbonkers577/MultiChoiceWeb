@@ -98,9 +98,13 @@ namespace MultiChoiceWeb
                     Session["StudentAnswers"] = studentAnswers;
                 }
             }
-            catch(SqlException)
+            catch(SqlException ex)
             {
-
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
+            }
+            catch(Exception ex)
+            {
+                Session["Error"] = "The following error occurred : \n" + ex.Message.ToString() + " : " + ex.ToString();
             }
         }
 
