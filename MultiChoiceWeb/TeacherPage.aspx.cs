@@ -16,7 +16,7 @@ namespace MultiChoiceWeb
 
         protected void btnMakeTest_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("MakeTestPage.aspx");
         }
 
         protected void btnViewAllMarks_Click(object sender, EventArgs e)
