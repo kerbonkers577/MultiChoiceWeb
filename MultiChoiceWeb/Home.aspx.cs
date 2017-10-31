@@ -24,5 +24,10 @@ namespace MultiChoiceWeb
         {
             Response.Redirect("TeacherPage.aspx");
         }
+
+        protected void btnMasterPages_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DataMasterPage.aspx");
+        }
     }
 }

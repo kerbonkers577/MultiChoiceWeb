@@ -7,5 +7,7 @@
         <asp:Button ID="teacherBtn" runat="server" Text="Click if you're a Teacher" OnClick="teacherBtn_Click" /><br />
         <br />
         <asp:Button ID="studentBtn" runat="server" Text="Click if you're a Student" OnClick="studentBtn_Click" /><br />
+        <br />
+        <asp:Button ID="btnMasterPages" runat="server" Text="Master Pages" OnClick="btnMasterPages_Click" />
     </div>
 </asp:Content>
